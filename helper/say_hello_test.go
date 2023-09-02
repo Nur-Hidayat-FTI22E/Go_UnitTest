@@ -9,6 +9,27 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestMain(m *testing.M) {
+	//Before
+	fmt.Println("Before Unit Test")
+
+	m.Run()
+
+	//After
+	fmt.Println("After Unit Test")
+}
+
+func TestSubTest(t *testing.T) {
+	t.Run("Nur", func(t *testing.T) {
+		result := SayHello("dayat")
+		require.Equal(t, "Hello dayat", result, "result must be 'Hello dayat'")
+	})
+	t.Run("Hidayat", func(t *testing.T) {
+		result := SayHello("dayato")
+		require.Equal(t, "Hello dayato", result, "result must be 'Hello dayato'")
+	})
+}
+
 func TestSkip(t *testing.T) {
 	if runtime.GOOS == "darwin" {
 		t.Skip("Can not run on Mac os bro")
