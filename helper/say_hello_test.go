@@ -9,6 +9,37 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestTableSayHello(t *testing.T) {
+	tests := []struct {
+		name     string
+		request  string
+		expected string
+	}{
+		{
+			name:     "Nur",
+			request:  "Nur",
+			expected: "Hello Nur",
+		},
+		{
+			name:     "Hidayat",
+			request:  "Hidayat",
+			expected: "Hello Hidayat",
+		},
+		{
+			name:     "Coconut",
+			request:  "Coconut",
+			expected: "Hello Coconut",
+		},
+	}
+
+	for _, tests := range tests {
+		t.Run(tests.name, func(t *testing.T) {
+			result := SayHello(tests.request)
+			require.Equal(t, tests.expected, result)
+		})
+	}
+}
+
 func TestMain(m *testing.M) {
 	//Before
 	fmt.Println("Before Unit Test")
