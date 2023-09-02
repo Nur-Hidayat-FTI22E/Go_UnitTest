@@ -1,4 +1,4 @@
-module github.com/Nur-Hidayat-FTI22E/Go_UnitTest
+module github.com/Nur-Hidayat-FTI22E/Go_UnitTest/v2
 
 go 1.21.0
 
