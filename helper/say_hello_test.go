@@ -9,6 +9,49 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func BenchmarkTable(b *testing.B) {
+	benchmark := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "Nur",
+			request: "Nur",
+		},
+		{
+			name:    "Hidayat",
+			request: "Hidayat",
+		},
+	}
+
+	for _, bebenchmark := range benchmark {
+		b.Run(bebenchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				SayHello(bebenchmark.request)
+			}
+		})
+	}
+}
+
+func BenchmarkSubBenchmark(b *testing.B) {
+	b.Run("Nur", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			SayHello("Nur")
+		}
+	})
+	b.Run("Hidayat", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			SayHello("Hidayat")
+		}
+	})
+}
+
+func BenchmarkSayHello(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		SayHello("dayat")
+	}
+}
+
 func TestTableSayHello(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -62,8 +105,8 @@ func TestSubTest(t *testing.T) {
 }
 
 func TestSkip(t *testing.T) {
-	if runtime.GOOS == "darwin" {
-		t.Skip("Can not run on Mac os bro")
+	if runtime.GOOS == "linux" {
+		t.Skip("Can not run on linux bro")
 	}
 
 	result := SayHello("dayat")
